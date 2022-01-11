@@ -39,12 +39,11 @@ export class AboutComponent implements OnInit {
     // };
     // observable$.subscribe(observer);
 
-    const subscription = observable$.subscribe(value => console.log(value));
+    observable$.subscribe(value => console.log('Subscription 1 start: ', value));
 
     setTimeout(() => {
-      subscription.unsubscribe();
-      console.log('Unsubscribed');
-    }, 3000);
+      observable$.subscribe(value => console.log('Subscription 2 start: ', value));
+    }, 1000);
 
   }
 
