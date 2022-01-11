@@ -28,6 +28,9 @@ export class AboutComponent implements OnInit {
 
     const observable$ = new Observable(subscriber => {
       console.log('Observable executed');
+      subscriber.next('Alice');
+      subscriber.next('Ben');
+      setTimeout(() => subscriber.next('Charlie'), 2000);
      });
 
     // const observer = {
@@ -36,7 +39,7 @@ export class AboutComponent implements OnInit {
     // observable$.subscribe(observer);
 
     console.log('Before subscribe');
-    observable$.subscribe();
+    observable$.subscribe(value => console.log(value));
     console.log('After subscribe');
 
     // setTimeout(() => {
