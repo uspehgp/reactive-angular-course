@@ -28,22 +28,20 @@ export class AboutComponent implements OnInit {
 
     const observable$ = new Observable(subscriber => {
       console.log('Observable executed');
-      subscriber.next('Alice');
-      setTimeout(() => subscriber.next('Ben'), 2000);
-      setTimeout(() => subscriber.next('Charlie'), 4000);
-      // subscriber.next('Charlie');
-    });
+     });
 
     // const observer = {
     //   next: value => console.log(value)
     // };
     // observable$.subscribe(observer);
 
-    observable$.subscribe(value => console.log('Subscription 1 start: ', value));
+    console.log('Before subscribe');
+    observable$.subscribe();
+    console.log('After subscribe');
 
-    setTimeout(() => {
-      observable$.subscribe(value => console.log('Subscription 2 start: ', value));
-    }, 1000);
+    // setTimeout(() => {
+    //   observable$.subscribe(value => console.log('Subscription 2 start: ', value));
+    // }, 1000);
 
   }
 
