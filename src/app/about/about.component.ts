@@ -27,10 +27,10 @@ export class AboutComponent implements OnInit {
 
   ngOnInit() {
 
-    const ajax$ = ajax('https://random-data-api.com/api/name/random_name')
-      ajax$.subscribe(data => console.log('Subs1', data.response.first_name));
-      ajax$.subscribe(data => console.log('Subs2', data.response.first_name));
-      ajax$.subscribe(data => console.log('Subs3', data.response.first_name));
+    const ajax$ = ajax('https://random-data-api.com/api/name/random_name');
+    ajax$.subscribe(data => console.log('Subs1', data.response.first_name));
+    ajax$.subscribe(data => console.log('Subs2', data.response.first_name));
+    ajax$.subscribe(data => console.log('Subs3', data.response.first_name));
     // const observable$ = new Observable<number>(subscriber => {
     //   let counter = 0;
     //   const intervalId = setInterval(() => {
@@ -52,10 +52,13 @@ export class AboutComponent implements OnInit {
   }
 
   run($event: MouseEvent) {
-             const runClick = new Observable(subscriber => {
+    const runClick = new Observable(subscriber => {
 
-             })
+    });
+
+
   }
+
 }
 
 
