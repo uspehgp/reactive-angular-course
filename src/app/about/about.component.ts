@@ -51,8 +51,10 @@ export class AboutComponent implements OnInit {
 
   }
 
-  run() {
+  run($event: MouseEvent) {
+             const runClick = new Observable(subscriber => {
 
+             })
   }
 }
 
