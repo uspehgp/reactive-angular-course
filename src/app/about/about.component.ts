@@ -27,43 +27,84 @@ export class AboutComponent implements OnInit {
   ngOnInit() {
 
     const observable$ = new Observable(subscriber => {
-      console.log('Observable executed');
-      subscriber.next('Alice');
-      subscriber.next('Ben');
-      setTimeout(() => {
-          subscriber.error(new Error('Error'));
-        },
-        2000);
-      setTimeout(() => {
-          subscriber.next('Charlie');
-          subscriber.complete();
-        },
-        4000
-      );
-      return () => console.log('Teardown');
-    });
-
-    // const observer = {
-    //   next: value => console.log(value)
-    // };
-    // observable$.subscribe(observer);
-
-    console.log('Before subscribe');
-    observable$.subscribe({
-      next: value => console.log(value),
-      error: err => console.log(err.message)
-    });
-    console.log('After subscribe');
-
-    // setTimeout(() => {
-    //   observable$.subscribe(value => console.log('Subscription 2 start: ', value));
-    // }, 1000);
-
-
+      let n = 0;
+      while (true) {
+        setTimeout(() => {
+            subscriber.next(n);
+          },
+          1000);
+      }
+      n++;
+    };
+    console.log('Observable executed');
+    subscriber.next('Alice');
+    subscriber.next('Ben');
+    setTimeout(() => {
+        subscriber.error(new Error('Error'));
+      },
+      2000);
+    setTimeout(() => {
+        subscriber.next('Charlie');
+        subscriber.complete();
+      },
+      4000
+    );
+    return () => console.log('Teardown');
   }
 
-  run() {
-  }
+);
+
+  // const observer = {
+  //   next: value => console.log(value)
+  // };
+  // observable$.subscribe(observer);
+
+  console;
+.
+
+  log(
+
+  'Before subscribe';
+);
+  observable$;
+.
+
+  subscribe({
+              next: value
+
+=>
+  console;
+.
+
+  log(value)
+
+,
+  error: err;
+=>
+  console;
+.
+
+  log(err
+
+.
+  message;
+)
+}
+
+)
+;
+console.log('After subscribe');
+
+// setTimeout(() => {
+//   observable$.subscribe(value => console.log('Subscription 2 start: ', value));
+// }, 1000);
+
+
+}
+
+run();
+{
+}
 
 
 }
