@@ -32,7 +32,7 @@ export class AboutComponent implements OnInit {
       subscriber.next('Ben');
       setTimeout(() => {
           subscriber.next('Charlie');
-          subscriber.complete();
+          subscriber.error(new Error('Error'));
         },
         2000
       );
@@ -47,7 +47,7 @@ export class AboutComponent implements OnInit {
     console.log('Before subscribe');
     observable$.subscribe({
       next: value => console.log(value),
-      complete: () => console.log('complete')
+      error: err => console.log(err.message)
     });
     console.log('After subscribe');
 
