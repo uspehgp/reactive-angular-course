@@ -26,42 +26,29 @@ export class AboutComponent implements OnInit {
 
   ngOnInit() {
 
-    const observable$ = new Observable(subscriber => {
-      console.log('Observable executed');
-      subscriber.next('Alice');
-      subscriber.next('Ben');
-      setTimeout(() => {
-          subscriber.next('Charlie');
-          subscriber.error(new Error('Error'));
-        },
-        2000
-      );
-      return () => console.log('Teardown');
+    const observable$ = new Observable<number>(subscriber => {
+      let counter = 0;
+      const intervalId = setInterval(() => {
+        console.log('emitted ', counter);
+        subscriber.next(counter++);
+      }, 1000);
+      return () => {
+        clearInterval(intervalId);
+      };
     });
 
-    // const observer = {
-    //   next: value => console.log(value)
-    // };
-    // observable$.subscribe(observer);
+    const subscription = observable$.subscribe(value => console.log(value));
 
-    console.log('Before subscribe');
-    observable$.subscribe({
-      next: value => console.log(value),
-      error: err => console.log(err.message)
-    });
-    console.log('After subscribe');
-
-    // setTimeout(() => {
-    //   observable$.subscribe(value => console.log('Subscription 2 start: ', value));
-    // }, 1000);
-
+    setTimeout(() => {
+      subscription.unsubscribe();
+      console.log('Unsubscribed');
+    }, 7000);
 
   }
 
   run() {
+
   }
-
-
 }
 
 
