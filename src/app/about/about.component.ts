@@ -30,8 +30,13 @@ export class AboutComponent implements OnInit {
       console.log('Observable executed');
       subscriber.next('Alice');
       subscriber.next('Ben');
-      setTimeout(() => subscriber.next('Charlie'), 2000);
-     });
+      setTimeout(() => {
+          subscriber.next('Charlie');
+          subscriber.complete();
+        },
+        2000
+      );
+    });
 
     // const observer = {
     //   next: value => console.log(value)
@@ -39,19 +44,20 @@ export class AboutComponent implements OnInit {
     // observable$.subscribe(observer);
 
     console.log('Before subscribe');
-    observable$.subscribe(value => console.log(value));
+    observable$.subscribe({
+      next: value => console.log(value),
+      complete: () => console.log('complete')
+    });
     console.log('After subscribe');
 
     // setTimeout(() => {
     //   observable$.subscribe(value => console.log('Subscription 2 start: ', value));
     // }, 1000);
 
+
   }
 
-
   run() {
-
-
   }
 
 
