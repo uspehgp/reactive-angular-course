@@ -26,87 +26,26 @@ export class AboutComponent implements OnInit {
 
   ngOnInit() {
 
-    const observable$ = new Observable(subscriber => {
-      let n = 0;
-      while (true) {
-        setTimeout(() => {
-            subscriber.next(n);
-          },
-          1000);
-      }
-      n++;
-    };
-    console.log('Observable executed');
-    subscriber.next('Alice');
-    subscriber.next('Ben');
+    const observable$ = new Observable<number>(subscriber => {
+      let counter = 0;
+      setInterval(() => {
+        console.log('emitted ', counter);
+        subscriber.next(counter++);
+      }, 1000);
+    });
+
+    const subscription = observable$.subscribe(value => console.log(value));
+
     setTimeout(() => {
-        subscriber.error(new Error('Error'));
-      },
-      2000);
-    setTimeout(() => {
-        subscriber.next('Charlie');
-        subscriber.complete();
-      },
-      4000
-    );
-    return () => console.log('Teardown');
+      subscription.unsubscribe();
+      console.log('Unsubscribed');
+    }, 7000);
+
   }
 
-);
+  run() {
 
-  // const observer = {
-  //   next: value => console.log(value)
-  // };
-  // observable$.subscribe(observer);
-
-  console;
-.
-
-  log(
-
-  'Before subscribe';
-);
-  observable$;
-.
-
-  subscribe({
-              next: value
-
-=>
-  console;
-.
-
-  log(value)
-
-,
-  error: err;
-=>
-  console;
-.
-
-  log(err
-
-.
-  message;
-)
-}
-
-)
-;
-console.log('After subscribe');
-
-// setTimeout(() => {
-//   observable$.subscribe(value => console.log('Subscription 2 start: ', value));
-// }, 1000);
-
-
-}
-
-run();
-{
-}
-
-
+  }
 }
 
 
