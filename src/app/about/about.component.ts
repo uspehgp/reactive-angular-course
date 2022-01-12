@@ -31,10 +31,14 @@ export class AboutComponent implements OnInit {
       subscriber.next('Alice');
       subscriber.next('Ben');
       setTimeout(() => {
-          subscriber.next('Charlie');
           subscriber.error(new Error('Error'));
         },
-        2000
+        2000);
+      setTimeout(() => {
+          subscriber.next('Charlie');
+          subscriber.complete();
+        },
+        4000
       );
       return () => console.log('Teardown');
     });
