@@ -36,6 +36,7 @@ export class AboutComponent implements OnInit {
         },
         2000
       );
+      return () => console.log('Teardown');
     });
 
     // const observer = {
