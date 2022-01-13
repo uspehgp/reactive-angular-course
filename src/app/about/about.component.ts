@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, OnInit, ViewEncapsulation} from '@angular/core';
 import {
   concat,
   fromEvent,
@@ -27,10 +27,10 @@ export class AboutComponent implements OnInit {
 
   ngOnInit() {
 
-    const ajax$ = ajax('https://random-data-api.com/api/name/random_name');
-    ajax$.subscribe(data => console.log('Subs1', data.response.first_name));
-    ajax$.subscribe(data => console.log('Subs2', data.response.first_name));
-    ajax$.subscribe(data => console.log('Subs3', data.response.first_name));
+    // const ajax$ = ajax('https://random-data-api.com/api/name/random_name');
+    // ajax$.subscribe(data => console.log('Subs1', data.response.first_name));
+    // ajax$.subscribe(data => console.log('Subs2', data.response.first_name));
+    // ajax$.subscribe(data => console.log('Subs3', data.response.first_name));
     // const observable$ = new Observable<number>(subscriber => {
     //   let counter = 0;
     //   const intervalId = setInterval(() => {
@@ -50,11 +50,33 @@ export class AboutComponent implements OnInit {
     // }, 7000);
 
   }
+//   const helloButton = document.querySelector('button#hello');
+//
+//   const helloClick$ = new Observable<MouseEvent>(subscriber => {
+//     helloButton.addEventListener('click', (event) => {
+//       subscriber.next(event);
+//     });
+//   });
+//
+//   helloClick$.subscribe(
+//     event => console.log('Sub 1:', event.type, event.x, event.y)
+// );
+//
+//   setTimeout(() => {
+//   console.log('Subscription 2 starts');
+//   helloClick$.subscribe(
+//     event => console.log('Sub 2:', event.type, event.x, event.y)
+// );
+// }, 5000);
 
   run($event: MouseEvent) {
     const runClick = new Observable(subscriber => {
-
+      const clickBut = new EventEmitter((event) => {
+        subscriber.next(event);
+      });
     });
+
+    runClick.subscribe(event => console.log(event));
 
 
   }
