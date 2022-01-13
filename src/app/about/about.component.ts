@@ -26,7 +26,10 @@ import {ajax} from 'rxjs/ajax';
 export class AboutComponent implements OnInit {
 
   ngOnInit() {
-    of('Alice', 'Ben', 'Charly').subscribe((v) => console.log(v));
+    of('Alice', 'Ben', 'Charly').subscribe({
+      next: (v) => console.log(v),
+      complete: () => console.log('completed')
+    });
   }
 
   run($event: MouseEvent) {
