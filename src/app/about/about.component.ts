@@ -29,14 +29,14 @@ export class AboutComponent implements OnInit {
 
     console.log('App started');
 
-    // const timer$ = new Observable<number>(subscriber => {
-    //   setTimeout(() => {
-    //     subscriber.next(0);
-    //     subscriber.complete();
-    //   }, 2000);
-    // });
+    const timer$ = new Observable<number>(subscriber => {
+      setTimeout(() => {
+        subscriber.next(0);
+        subscriber.complete();
+      }, 2000);
+    });
 
-    timer(2000).subscribe({
+    timer$.subscribe({
       next: value => console.log(value),
       complete: () => console.log('Completed')
     });
