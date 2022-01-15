@@ -27,20 +27,31 @@ export class AboutComponent implements OnInit {
 
   ngOnInit() {
 
-    const randomName$ = ajax('https://random-data-api.com/api/name/random_name');
+    const a$ = new Observable(subscriber => {
+      setTimeout(() => {
+        subscriber.next('A');
+        subscriber.complete();
+      }, 5000);
 
-    const randomNation$ = ajax('https://random-data-api.com/api/nation/random_nation');
+      return () => {
+        console.log('A teardown');
+      };
+    });
 
-    const randomFood$ = ajax('https://random-data-api.com/api/food/random_food');
+    const b$ = new Observable(subscriber => {
+      setTimeout(() => {
+        subscriber.error('Failure!');
+      }, 3000);
 
-    // randomName$.subscribe(ajaxResponse => console.log(ajaxResponse.response.first_name));
-    // randomNation$.subscribe(ajaxResponse => console.log(ajaxResponse.response.capital));
-    // randomFood$.subscribe(ajaxResponse => console.log(ajaxResponse.response.dish));
+      return () => {
+        console.log('B teardown');
+      };
+    });
 
-    forkJoin([randomName$, randomNation$, randomFood$]).subscribe(
-      ([nameAjax, nationAjax, foodAjax]) => console.log(`${nameAjax.response.first_name} is from ${nationAjax.response.capital} and likes to eat ${foodAjax.response.dish}.`)
-    );
-  }
+    forkJoin([a$, b$]).subscribe({
+      next: value => console.log(value),
+      error: err => console.log('Error:', err)
+    });  }
 
   run($event) {
     // fromEvent($event, 'click').subscribe(
