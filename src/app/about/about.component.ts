@@ -27,8 +27,19 @@ export class AboutComponent implements OnInit {
 
   ngOnInit() {
 
+    console.log('App started');
 
+    // const timer$ = new Observable<number>(subscriber => {
+    //   setTimeout(() => {
+    //     subscriber.next(0);
+    //     subscriber.complete();
+    //   }, 2000);
+    // });
 
+    timer(2000).subscribe({
+      next: value => console.log(value),
+      complete: () => console.log('Completed')
+    });
 // const names$ = new Observable<string>(subscriber => {
 //   subscriber.next('Alice');
 //   subscriber.next('Ben');
@@ -52,9 +63,9 @@ export class AboutComponent implements OnInit {
   }
 
   run($event) {
-    fromEvent($event, 'click').subscribe(
-      event => console.log(event)
-    );
+    // fromEvent($event, 'click').subscribe(
+    //   event => console.log(event)
+    // );
   }
 }
 
