@@ -39,13 +39,13 @@ export class AboutComponent implements OnInit {
       map(ajaxResponse => ajaxResponse.response.dish)
     );
 
-    randomFirstName$.subscribe(value => console.log(value));
-    randomCapital$.subscribe(value => console.log(value));
-    randomDish$.subscribe(value => console.log(value));
+    // randomFirstName$.subscribe(value => console.log(value));
+    // randomCapital$.subscribe(value => console.log(value));
+    // randomDish$.subscribe(value => console.log(value));
 
-    // forkJoin([randomName$, randomNation$, randomFood$]).subscribe(
-    //   ([nameAjax, nationAjax, foodAjax]) => console.log(`${nameAjax.response.first_name} is from ${nationAjax.response.capital} and likes to eat ${foodAjax.response.dish}.`)
-    // );
+    forkJoin([randomFirstName$, randomCapital$, randomDish$]).subscribe(
+      ([firstName, capital, dish]) => console.log(`${firstName} is from ${capital} and likes to eat ${dish}.`)
+    );
   }
 
   run($event: MouseEvent) {
