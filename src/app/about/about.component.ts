@@ -45,15 +45,14 @@ export class AboutComponent implements OnInit {
         subscriber.next({category: 'Business', content: 'E'}), 7000);
     });
 
-    newsFeed$.pipe(
-      filter(item => item.category === 'Sports')).subscribe(item => console.log(item));
-
+    const sportsNewsFeed$ = newsFeed$.pipe(
+      filter(item => item.category === 'Sports'));
 
     // console.log(sportsNewsFeed$);
 
-    // newsFeed$.subscribe(
-    //   item => console.log(item)
-    // );
+    sportsNewsFeed$.subscribe(
+      item => console.log(item)
+    );
   }
 
   run($event: MouseEvent) {
