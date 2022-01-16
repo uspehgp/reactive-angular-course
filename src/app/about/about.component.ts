@@ -27,32 +27,19 @@ export class AboutComponent implements OnInit {
 
   ngOnInit() {
 
-    interface NewsItem {
-      category: 'Business' | 'Sports';
-      content: string;
-    }
+    const randomName$ = ajax('https://random-data-api.com/api/name/random_name');
 
-    const newsFeed$ = new Observable<NewsItem>(subscriber => {
-      setTimeout(() =>
-        subscriber.next({category: 'Business', content: 'A'}), 1000);
-      setTimeout(() =>
-        subscriber.next({category: 'Sports', content: 'B'}), 3000);
-      setTimeout(() =>
-        subscriber.next({category: 'Business', content: 'C'}), 4000);
-      setTimeout(() =>
-        subscriber.next({category: 'Sports', content: 'D'}), 6000);
-      setTimeout(() =>
-        subscriber.next({category: 'Business', content: 'E'}), 7000);
-    });
+    const randomNation$ = ajax('https://random-data-api.com/api/nation/random_nation');
 
-    const sportsNewsFeed$ = newsFeed$.pipe(
-      filter(item => item.category === 'Sports'));
+    const randomFood$ = ajax('https://random-data-api.com/api/food/random_food');
 
-    // console.log(sportsNewsFeed$);
+    randomName$.subscribe(value => console.log(value));
+    randomNation$.subscribe(value => console.log(value));
+    randomFood$.subscribe(value => console.log(value));
 
-    newsFeed$.subscribe(
-      item => console.log(item)
-    );
+    // forkJoin([randomName$, randomNation$, randomFood$]).subscribe(
+    //   ([nameAjax, nationAjax, foodAjax]) => console.log(`${nameAjax.response.first_name} is from ${nationAjax.response.capital} and likes to eat ${foodAjax.response.dish}.`)
+    // );
   }
 
   run($event: MouseEvent) {
