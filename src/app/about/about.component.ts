@@ -27,15 +27,21 @@ export class AboutComponent implements OnInit {
 
   ngOnInit() {
 
-    const randomName$ = ajax('https://random-data-api.com/api/name/random_name');
+    const randomFirstName$ = ajax('https://random-data-api.com/api/name/random_name').pipe(
+      map(ajaxResponse => ajaxResponse.response.first_name)
+    );
 
-    const randomNation$ = ajax('https://random-data-api.com/api/nation/random_nation');
+    const randomCapital$ = ajax('https://random-data-api.com/api/nation/random_nation').pipe(
+      map(ajaxResponse => ajaxResponse.response.capital)
+    );
 
-    const randomFood$ = ajax('https://random-data-api.com/api/food/random_food');
+    const randomDish$ = ajax('https://random-data-api.com/api/food/random_food').pipe(
+      map(ajaxResponse => ajaxResponse.response.dish)
+    );
 
-    randomName$.subscribe(value => console.log(value));
-    randomNation$.subscribe(value => console.log(value));
-    randomFood$.subscribe(value => console.log(value));
+    randomFirstName$.subscribe(value => console.log(value));
+    randomCapital$.subscribe(value => console.log(value));
+    randomDish$.subscribe(value => console.log(value));
 
     // forkJoin([randomName$, randomNation$, randomFood$]).subscribe(
     //   ([nameAjax, nationAjax, foodAjax]) => console.log(`${nameAjax.response.first_name} is from ${nationAjax.response.capital} and likes to eat ${foodAjax.response.dish}.`)
