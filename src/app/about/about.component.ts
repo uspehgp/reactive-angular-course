@@ -27,41 +27,39 @@ export class AboutComponent implements OnInit {
 
   ngOnInit() {
 
-    const a$ = new Observable(subscriber => {
-      setTimeout(() => {
-        subscriber.next('A');
-        subscriber.complete();
-      }, 5000);
+    interface NewsItem {
+      category: 'Business' | 'Sports';
+      content: string;
+    }
 
-      return () => {
-        console.log('A teardown');
-      };
+    const newsFeed$ = new Observable<NewsItem>(subscriber => {
+      setTimeout(() =>
+        subscriber.next({category: 'Business', content: 'A'}), 1000);
+      setTimeout(() =>
+        subscriber.next({category: 'Sports', content: 'B'}), 3000);
+      setTimeout(() =>
+        subscriber.next({category: 'Business', content: 'C'}), 4000);
+      setTimeout(() =>
+        subscriber.next({category: 'Sports', content: 'D'}), 6000);
+      setTimeout(() =>
+        subscriber.next({category: 'Business', content: 'E'}), 7000);
     });
 
-    const b$ = new Observable(subscriber => {
-      setTimeout(() => {
-        subscriber.error('Failure!');
-      }, 3000);
+    newsFeed$.pipe(
+      filter(item => item.category === 'Sports')).subscribe(item => console.log(item));
 
-      return () => {
-        console.log('B teardown');
-      };
-    });
 
-    forkJoin([a$, b$]).subscribe({
-      next: value => console.log(value),
-      error: err => console.log('Error:', err)
-    });  }
+    // console.log(sportsNewsFeed$);
 
-  run($event) {
-    // fromEvent($event, 'click').subscribe(
-    //   event => console.log(event)
+    // newsFeed$.subscribe(
+    //   item => console.log(item)
     // );
   }
+
+  run($event: MouseEvent) {
+
+  }
 }
-
-
-
 
 
 
