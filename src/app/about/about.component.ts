@@ -50,7 +50,7 @@ export class AboutComponent implements OnInit {
 
     // console.log(sportsNewsFeed$);
 
-    sportsNewsFeed$.subscribe(
+    newsFeed$.subscribe(
       item => console.log(item)
     );
   }
